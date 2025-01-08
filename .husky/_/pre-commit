@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+npm run format
+npm run check
+git add -A
+npm run validate

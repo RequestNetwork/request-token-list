@@ -9,7 +9,8 @@
     "test": "vitest",
     "format": "biome format . --write",
     "lint": "biome lint .",
-    "check": "biome check --apply ."
+    "check": "biome check --apply .",
+    "prepare": "husky"
   },
   "keywords": [
     "request-network",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/node": "^22.10.5",
     "biome": "^0.3.3",
+    "husky": "^9.1.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
