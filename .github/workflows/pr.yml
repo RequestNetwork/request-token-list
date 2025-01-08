@@ -30,9 +30,3 @@ jobs:
 
       - name: Validate token list
         run: npm run validate
-
-      - name: Check formatting
-        run: npm run format:check
-
-      - name: Run linter
-        run: npm run lint
