@@ -49,4 +49,5 @@ export enum NetworkType {
   ZKSYNCERA = "zksyncera",
   ZKSYNCERATESTNET = "zksynceratestnet",
   BASE = "base",
+  FIAT = "fiat",
 }
