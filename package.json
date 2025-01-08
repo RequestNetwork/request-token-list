@@ -1,0 +1,32 @@
+{
+  "name": "request-token-list",
+  "version": "1.0.0",
+  "description": "Official Request Network Token List",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "validate": "tsx src/validation/validate.ts",
+    "test": "vitest",
+    "format": "biome format . --write",
+    "lint": "biome lint .",
+    "check": "biome check --apply ."
+  },
+  "keywords": [
+    "request-network",
+    "tokens",
+    "defi"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "ethers": "^6.13.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "biome": "^0.3.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

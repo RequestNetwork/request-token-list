@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Request Network Token List",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the token list"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp of when this list was last updated"
+    },
+    "version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer"
+        },
+        "minor": {
+          "type": "integer"
+        },
+        "patch": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "major",
+        "minor",
+        "patch"
+      ]
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/token"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "timestamp",
+    "version",
+    "tokens"
+  ],
+  "definitions": {
+    "token": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "decimals": {
+          "type": "integer"
+        },
+        "address": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string",
+          "enum": [
+            "mainnet",
+            "matic",
+            "fantom",
+            "bsc",
+            "xdai",
+            "avalanche",
+            "optimism",
+            "moonbeam",
+            "sepolia",
+            "fuse",
+            "arbitrum-one",
+            "tombchain",
+            "mantle",
+            "mantle-testnet",
+            "core",
+            "zksyncera",
+            "zksynceratestnet",
+            "base",
+            "fiat"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ETH",
+            "ERC20",
+            "ISO4217"
+          ]
+        },
+        "hash": {
+          "type": "string"
+        },
+        "logoURI": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "symbol",
+        "decimals",
+        "address",
+        "network",
+        "type"
+      ]
+    }
+  }
+}
