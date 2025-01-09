@@ -5,6 +5,7 @@ export interface RequestToken {
   decimals: number;
   address: string;
   network: NetworkType;
+  chainId: number;
   type: TokenType;
   hash?: string;
   logoURI?: string;
@@ -49,4 +50,27 @@ export enum NetworkType {
   ZKSYNCERA = "zksyncera",
   ZKSYNCERATESTNET = "zksynceratestnet",
   BASE = "base",
+  FIAT = "fiat",
 }
+
+export const CHAIN_IDS: Record<string, number> = {
+  mainnet: 1,
+  matic: 137,
+  fantom: 250,
+  bsc: 56,
+  xdai: 100,
+  avalanche: 43114,
+  optimism: 10,
+  moonbeam: 1284,
+  sepolia: 11155111,
+  fuse: 122,
+  "arbitrum-one": 42161,
+  tombchain: 6969,
+  mantle: 5000,
+  "mantle-testnet": 5001,
+  core: 1116,
+  zksyncera: 324,
+  zksynceratestnet: 300,
+  base: 8453,
+  fiat: 0, // Special case for fiat currencies
+};
