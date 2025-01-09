@@ -2,7 +2,13 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import { ethers } from "ethers";
 import { readFileSync } from "fs";
-import { TokenList, RequestToken, NetworkType, TokenType } from "../types";
+import {
+  TokenList,
+  RequestToken,
+  NetworkType,
+  TokenType,
+  CHAIN_IDS,
+} from "../types";
 import schema from "../schemas/token-list-schema.json";
 
 const ajv = new Ajv();
@@ -80,6 +86,14 @@ async function validateToken(token: RequestToken): Promise<boolean> {
     return false;
   }
 
+  // Validate chainId
+  if (!isValidChainId(token.network, token.chainId)) {
+    console.error(
+      `Invalid chainId for token ${token.id} on network ${token.network}: ${token.chainId}`
+    );
+    return false;
+  }
+
   return true;
 }
 
@@ -115,6 +129,11 @@ function isValidTokenType(type: TokenType): boolean {
   return Object.values(TokenType).includes(type);
 }
 
+function isValidChainId(network: NetworkType, chainId: number): boolean {
+  const expectedChainId = CHAIN_IDS[network.toLowerCase()];
+  return expectedChainId === chainId;
+}
+
 function hasDuplicateTokens(tokens: RequestToken[]): boolean {
   const ids = new Set<string>();
   for (const token of tokens) {
@@ -125,16 +144,6 @@ function hasDuplicateTokens(tokens: RequestToken[]): boolean {
   }
   return false;
 }
-
-// Optional: Validate contract existence on network
-// async function contractExistsOnNetwork(
-//   address: string,
-//   network: NetworkType
-// ): Promise<boolean> {
-//   // Implementation would depend on how you want to verify contract existence
-//   // Could use ethers.js to check contract code existence
-//   return true;
-// }
 
 async function main() {
   try {

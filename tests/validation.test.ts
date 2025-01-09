@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { validateTokenList } from "../src/validation/validate";
-import { NetworkType, TokenList, TokenType } from "../src/types";
+import { NetworkType, TokenList, TokenType, CHAIN_IDS } from "../src/types";
 
 describe("Token List Validation", () => {
   const validToken = {
@@ -10,6 +10,7 @@ describe("Token List Validation", () => {
     decimals: 18,
     address: "0x1234567890123456789012345678901234567890",
     network: NetworkType.MAINNET,
+    chainId: CHAIN_IDS.mainnet,
     type: TokenType.ERC20,
   };
 
@@ -125,5 +126,48 @@ describe("Token List Validation", () => {
     };
 
     expect(await validateTokenList(invalidList)).toBe(false);
+  });
+
+  it("should reject invalid chainId for network", async () => {
+    const invalidList: TokenList = {
+      name: "Test Token List",
+      timestamp: new Date().toISOString(),
+      version: { major: 1, minor: 0, patch: 0 },
+      tokens: [
+        {
+          ...validToken,
+          network: NetworkType.MATIC,
+          chainId: CHAIN_IDS.mainnet, // Wrong chainId for MATIC network
+        },
+      ],
+    };
+
+    expect(await validateTokenList(invalidList)).toBe(false);
+  });
+
+  it("should validate correct chainId for each network", async () => {
+    // Test a few different networks
+    const networks = [
+      { network: NetworkType.MATIC, chainId: CHAIN_IDS.matic },
+      { network: NetworkType.BSC, chainId: CHAIN_IDS.bsc },
+      { network: NetworkType.AVALANCHE, chainId: CHAIN_IDS.avalanche },
+    ];
+
+    for (const { network, chainId } of networks) {
+      const validList: TokenList = {
+        name: "Test Token List",
+        timestamp: new Date().toISOString(),
+        version: { major: 1, minor: 0, patch: 0 },
+        tokens: [
+          {
+            ...validToken,
+            network,
+            chainId,
+          },
+        ],
+      };
+
+      expect(await validateTokenList(validList)).toBe(true);
+    }
   });
 });
