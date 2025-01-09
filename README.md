@@ -9,12 +9,14 @@ This repository contains a curated list of tokens supported by Request Network p
 ## Usage
 
 The token list is available at:
-`[TOKEN_LIST_URL]`
+`https://requestnetwork.github.io/request-token-list/latest.json`
 
 You can fetch the token list directly in your application:
 
 ```typescript
-const tokenList = await fetch("TOKEN_LIST_URL").then((res) => res.json());
+const tokenList = await fetch(
+  "https://requestnetwork.github.io/request-token-list/latest.json"
+).then((res) => res.json());
 ```
 
 ## Token List Structure
