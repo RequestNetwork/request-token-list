@@ -8025,6 +8025,17 @@
       "type": "ETH",
       "hash": "0xb678b03f3f3a6ea652ad1d183032fac176d83b08",
       "chainId": 8453
+    },
+    {
+      "id": "USDC-base",
+      "name": "USDC",
+      "symbol": "USDC",
+      "decimals": 6,
+      "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "chainId": 8453
     }
   ]
 }
