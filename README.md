@@ -25,6 +25,7 @@ Each token in the list contains the following information:
 
 ```json
 {
+  "id": "TKN-mainnet",
   "name": "Token Name",
   "address": "0x...",
   "symbol": "TKN",
