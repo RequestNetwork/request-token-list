@@ -8027,6 +8027,17 @@
       "chainId": 8453
     },
     {
+      "id": "ZCHF-mainnet",
+      "name": "Frankencoin",
+      "symbol": "ZCHF",
+      "decimals": 18,
+      "address": "0xB58E61C3098d85632Df34EecfB899A1Ed80921cB",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0xB58E61C3098d85632Df34EecfB899A1Ed80921cB",
+      "chainId": 1
+    },
+    {
       "id": "USDC-base",
       "name": "USDC",
       "symbol": "USDC",
