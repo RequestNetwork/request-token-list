@@ -8083,13 +8083,35 @@
     },
     {
       "id": "USDC-base",
-      "name": "USDC",
+      "name": "USD Coin",
       "symbol": "USDC",
       "decimals": 6,
       "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       "network": "base",
       "type": "ERC20",
       "hash": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "chainId": 8453
+    },
+    {
+      "id": "DAI-base",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "address": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "chainId": 8453
+    },
+    {
+      "id": "USDT-base",
+      "name": "USD Tether",
+      "symbol": "USDT",
+      "decimals": 6,
+      "address": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
       "chainId": 8453
     }
   ]
