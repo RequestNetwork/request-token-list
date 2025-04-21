@@ -7598,9 +7598,20 @@
       "chainId": 137
     },
     {
-      "id": "USDC-matic",
-      "name": "USDC",
+      "id": "USDCn-matic",
+      "name": "USD Coin",
       "symbol": "USDC",
+      "decimals": 6,
+      "address": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+      "network": "matic",
+      "type": "ERC20",
+      "hash": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+      "chainId": 137
+    },
+    {
+      "id": "USDC-matic",
+      "name": "USD Coin (PoS) (USDC.e)",
+      "symbol": "USDCe",
       "decimals": 6,
       "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
       "network": "matic",
@@ -7742,13 +7753,24 @@
     },
     {
       "id": "USDC-optimism",
-      "name": "USDC",
-      "symbol": "USDC",
+      "name": "USD Coin (Bridged from Ethereum) (USDC.e)",
+      "symbol": "USDCe",
       "decimals": 6,
       "address": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
       "network": "optimism",
       "type": "ERC20",
       "hash": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
+      "chainId": 10
+    },
+    {
+      "id": "USDCn-optimism",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
+      "network": "optimism",
+      "type": "ERC20",
+      "hash": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85",
       "chainId": 10
     },
     {
@@ -7906,6 +7928,39 @@
       "chainId": 42161
     },
     {
+      "id": "USDC-arbitrum-one",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "address": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      "network": "arbitrum-one",
+      "type": "ERC20",
+      "hash": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      "chainId": 42161
+    },
+    {
+      "id": "USDT-arbitrum-one",
+      "name": "USD Tether",
+      "symbol": "USDT",
+      "decimals": 6,
+      "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "network": "arbitrum-one",
+      "type": "ERC20",
+      "hash": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "chainId": 42161
+    },
+    {
+      "id": "DAI-arbitrum-one",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "address": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+      "network": "arbitrum-one",
+      "type": "ERC20",
+      "hash": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+      "chainId": 42161
+    },
+    {
       "id": "AVAX-avalanche",
       "name": "AVAX",
       "symbol": "AVAX",
@@ -8028,13 +8083,35 @@
     },
     {
       "id": "USDC-base",
-      "name": "USDC",
+      "name": "USD Coin",
       "symbol": "USDC",
       "decimals": 6,
       "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       "network": "base",
       "type": "ERC20",
       "hash": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "chainId": 8453
+    },
+    {
+      "id": "DAI-base",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "address": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb",
+      "chainId": 8453
+    },
+    {
+      "id": "USDT-base",
+      "name": "USD Tether",
+      "symbol": "USDT",
+      "decimals": 6,
+      "address": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
       "chainId": 8453
     }
   ]
