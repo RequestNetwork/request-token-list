@@ -7609,17 +7609,6 @@
       "chainId": 137
     },
     {
-      "id": "USDC-matic",
-      "name": "USD Coin (PoS) (USDC.e)",
-      "symbol": "USDCe",
-      "decimals": 6,
-      "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-      "network": "matic",
-      "type": "ERC20",
-      "hash": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-      "chainId": 137
-    },
-    {
       "id": "USDT-matic",
       "name": "USDT",
       "symbol": "USDT",
@@ -7750,17 +7739,6 @@
       "type": "ERC20",
       "hash": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
       "chainId": 43114
-    },
-    {
-      "id": "USDC-optimism",
-      "name": "USD Coin (Bridged from Ethereum) (USDC.e)",
-      "symbol": "USDCe",
-      "decimals": 6,
-      "address": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
-      "network": "optimism",
-      "type": "ERC20",
-      "hash": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
-      "chainId": 10
     },
     {
       "id": "USDCn-optimism",
