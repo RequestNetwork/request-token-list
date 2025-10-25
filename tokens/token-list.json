@@ -5640,7 +5640,7 @@
       "chainId": 1
     },
     {
-      "id": "mUSD-mainnet",
+      "id": "mUSD-metamask-mainnet",
       "name": "MetaMask USD",
       "symbol": "mUSD",
       "decimals": 6,
