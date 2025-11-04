@@ -1,16 +1,19 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "tokens/**"
+  release:
+    types: [published]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to push commits back to main
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
+        with:
+          ref: main  # Checkout main branch, not the release tag
+          fetch-depth: 0  # Fetch all history to access previous versions
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -24,6 +27,43 @@ jobs:
       - name: Validate token list
         run: npm run validate
 
+      - name: Update timestamp
+        run: |
+          # Update timestamp to current UTC time
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+          jq --arg ts "$TIMESTAMP" '.timestamp = $ts' tokens/token-list.json > tokens/token-list.json.tmp
+          mv tokens/token-list.json.tmp tokens/token-list.json
+          
+          # Commit timestamp update if changed
+          if ! git diff --quiet tokens/token-list.json; then
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add tokens/token-list.json
+            git commit -m "chore: Update timestamp for release [skip ci]"
+            git push origin main
+          fi
+
+      - name: Preserve current version as historical snapshot
+        run: |
+          # Get the current version being deployed
+          CURRENT_VERSION=$(jq -r '"\(.version.major).\(.version.minor).\(.version.patch)"' tokens/token-list.json)
+          
+          # Check if this version already exists in versions/
+          if [ ! -f "versions/v${CURRENT_VERSION}.json" ]; then
+            mkdir -p versions
+            cp tokens/token-list.json versions/v${CURRENT_VERSION}.json
+            echo "Preserved v${CURRENT_VERSION}.json as historical snapshot"
+            
+            # Commit the historical snapshot back to main
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add versions/v${CURRENT_VERSION}.json
+            git commit -m "chore: Preserve v${CURRENT_VERSION}.json as historical snapshot [skip ci]"
+            git push origin main
+          else
+            echo "v${CURRENT_VERSION}.json already exists in versions/ directory"
+          fi
+
       - name: Create dist directory
         run: |
           mkdir -p dist
@@ -33,13 +73,13 @@ jobs:
           MAJOR=$(jq -r '.version.major' tokens/token-list.json)
           MINOR=$(jq -r '.version.minor' tokens/token-list.json)
           
-          # Copy with full version (e.g., v1.1.0.json)
+          # Copy current version with full version (e.g., v1.1.0.json)
           cp tokens/token-list.json dist/v${VERSION}.json
           
-          # Copy with major.minor version (e.g., v1.1.json)
+          # Copy with major.minor version (e.g., v1.1.json) - updates automatically
           cp tokens/token-list.json dist/v${MAJOR}.${MINOR}.json
           
-          # Copy with major version only (e.g., v1.json)
+          # Copy with major version only (e.g., v1.json) - updates automatically
           cp tokens/token-list.json dist/v${MAJOR}.json
           
           # Copy as latest (always points to newest)
@@ -47,6 +87,12 @@ jobs:
           
           # Copy base file
           cp tokens/token-list.json dist/token-list.json
+          
+          # Copy all historical versions
+          if [ -d "versions" ]; then
+            cp versions/*.json dist/ 2>/dev/null || true
+            echo "Copied historical versions from versions/ directory"
+          fi
           
           echo "Created versioned files: v${VERSION}.json, v${MAJOR}.${MINOR}.json, v${MAJOR}.json, latest.json"
 
