@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
-npm run format
-npm run validate
-npm run check
+npm run format || exit 1
+git add -A
+npm run validate || exit 1
+npm run check || exit 1
