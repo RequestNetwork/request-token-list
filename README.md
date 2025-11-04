@@ -66,10 +66,11 @@ We welcome community contributions! To add a new token to the list:
    - **Patch** (x.x.1): Bug fixes, corrections to existing tokens
    - **Minor** (x.1.0): New token additions (most common)
    - **Major** (2.0.0): Breaking changes (e.g., removing tokens, changing schema)
-4. Update the timestamp to the current date
-5. Make sure your token meets our requirements (see [CONTRIBUTING.md](./CONTRIBUTING.md))
-6. Run tests locally: `npm test`
-7. Create a Pull Request
+4. Make sure your token meets our requirements (see [CONTRIBUTING.md](./CONTRIBUTING.md))
+5. Run tests locally: `npm test`
+6. Create a Pull Request
+
+**Note**: The timestamp is automatically updated by the deployment workflow when a release is published.
 
 ### Publishing a New Version
 
