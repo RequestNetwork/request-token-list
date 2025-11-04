@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: write  # Required to push commits back to main
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           ref: main  # Checkout main branch, not the release tag
           fetch-depth: 0  # Fetch all history to access previous versions
