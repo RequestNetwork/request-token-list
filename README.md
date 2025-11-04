@@ -70,7 +70,7 @@ We welcome community contributions! To add a new token to the list:
 5. Run tests locally: `npm test`
 6. Create a Pull Request
 
-**Note**: The timestamp is automatically updated by the deployment workflow when a release is published.
+**Note**: The timestamp is automatically updated when the deployment workflow runs after a release is published, marking the deployment time to GitHub Pages.
 
 ### Publishing a New Version
 
