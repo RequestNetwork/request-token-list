@@ -1,9 +1,9 @@
 {
   "name": "Request Network Token List",
-  "timestamp": "2025-01-09T11:39:10.425Z",
+  "timestamp": "2025-11-03T00:00:00.000Z",
   "version": {
     "major": 1,
-    "minor": 0,
+    "minor": 1,
     "patch": 0
   },
   "tokens": [
@@ -4331,6 +4331,17 @@
       "chainId": 1
     },
     {
+      "id": "GHO-mainnet",
+      "name": "GHO",
+      "symbol": "GHO",
+      "decimals": 18,
+      "address": "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f",
+      "chainId": 1
+    },
+    {
       "id": "HYDRO-mainnet",
       "name": "HYDRO",
       "symbol": "HYDRO",
@@ -5619,13 +5630,35 @@
     },
     {
       "id": "USDS-mainnet",
-      "name": "USDS",
+      "name": "StableUSD",
       "symbol": "USDS",
       "decimals": 6,
       "address": "0xA4Bdb11dc0a2bEC88d24A3aa1E6Bb17201112eBe",
       "network": "mainnet",
       "type": "ERC20",
       "hash": "0xA4Bdb11dc0a2bEC88d24A3aa1E6Bb17201112eBe",
+      "chainId": 1
+    },
+    {
+      "id": "USDS-sky-mainnet",
+      "name": "USDS",
+      "symbol": "USDS",
+      "decimals": 18,
+      "address": "0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0xdC035D45d973E3EC169d2276DDab16f1e407384F",
+      "chainId": 1
+    },
+    {
+      "id": "mUSD-metamask-mainnet",
+      "name": "MetaMask USD",
+      "symbol": "mUSD",
+      "decimals": 6,
+      "address": "0xacA92E438df0B2401fF60dA7E4337B687a2435DA",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0xacA92E438df0B2401fF60dA7E4337B687a2435DA",
       "chainId": 1
     },
     {
@@ -6422,7 +6455,7 @@
     },
     {
       "id": "mUSD-mainnet",
-      "name": "mUSD",
+      "name": "mStable USD",
       "symbol": "mUSD",
       "decimals": 18,
       "address": "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
@@ -7774,6 +7807,17 @@
       "chainId": 10
     },
     {
+      "id": "USDS-optimism",
+      "name": "USDS",
+      "symbol": "USDS",
+      "decimals": 18,
+      "address": "0x4F13a96EC5C4Cf34e442b46Bbd98a0791F20edC3",
+      "network": "optimism",
+      "type": "ERC20",
+      "hash": "0x4F13a96EC5C4Cf34e442b46Bbd98a0791F20edC3",
+      "chainId": 10
+    },
+    {
       "id": "USDC-multichain-moonbeam",
       "name": "USDC-multichain",
       "symbol": "USDC-multichain",
@@ -7936,6 +7980,17 @@
       "network": "arbitrum-one",
       "type": "ERC20",
       "hash": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+      "chainId": 42161
+    },
+    {
+      "id": "USDS-arbitrum-one",
+      "name": "USDS",
+      "symbol": "USDS",
+      "decimals": 18,
+      "address": "0x6491c05A82219b8D1479057361ff1654749b876b",
+      "network": "arbitrum-one",
+      "type": "ERC20",
+      "hash": "0x6491c05A82219b8D1479057361ff1654749b876b",
       "chainId": 42161
     },
     {

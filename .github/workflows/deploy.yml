@@ -27,8 +27,28 @@ jobs:
       - name: Create dist directory
         run: |
           mkdir -p dist
-          cp tokens/token-list.json dist/
+          
+          # Extract version components
+          VERSION=$(jq -r '"\(.version.major).\(.version.minor).\(.version.patch)"' tokens/token-list.json)
+          MAJOR=$(jq -r '.version.major' tokens/token-list.json)
+          MINOR=$(jq -r '.version.minor' tokens/token-list.json)
+          
+          # Copy with full version (e.g., v1.1.0.json)
+          cp tokens/token-list.json dist/v${VERSION}.json
+          
+          # Copy with major.minor version (e.g., v1.1.json)
+          cp tokens/token-list.json dist/v${MAJOR}.${MINOR}.json
+          
+          # Copy with major version only (e.g., v1.json)
+          cp tokens/token-list.json dist/v${MAJOR}.json
+          
+          # Copy as latest (always points to newest)
           cp tokens/token-list.json dist/latest.json
+          
+          # Copy base file
+          cp tokens/token-list.json dist/token-list.json
+          
+          echo "Created versioned files: v${VERSION}.json, v${MAJOR}.${MINOR}.json, v${MAJOR}.json, latest.json"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
