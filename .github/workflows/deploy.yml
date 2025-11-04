@@ -7,9 +7,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to push commits back to main
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: main  # Checkout main branch, not the release tag
           fetch-depth: 0  # Fetch all history to access previous versions
 
       - name: Setup Node.js
