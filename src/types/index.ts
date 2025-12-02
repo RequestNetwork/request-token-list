@@ -50,6 +50,7 @@ export enum NetworkType {
   ZKSYNCERA = "zksyncera",
   ZKSYNCERATESTNET = "zksynceratestnet",
   BASE = "base",
+  BASE_SEPOLIA = "base-sepolia",
   FIAT = "fiat",
 }
 
@@ -72,5 +73,6 @@ export const CHAIN_IDS: Record<string, number> = {
   zksyncera: 324,
   zksynceratestnet: 300,
   base: 8453,
+  "base-sepolia": 84532,
   fiat: 0, // Special case for fiat currencies
 };
