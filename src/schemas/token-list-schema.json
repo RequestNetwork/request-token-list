@@ -84,6 +84,7 @@
             "zksyncera",
             "zksynceratestnet",
             "base",
+            "base-sepolia",
             "fiat"
           ]
         },
