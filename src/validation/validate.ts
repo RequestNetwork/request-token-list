@@ -113,6 +113,10 @@ function isValidVersion(version: {
 }
 
 function isValidTimestamp(timestamp: string): boolean {
+  // Allow placeholder value that gets replaced during deployment
+  if (timestamp === "Set automatically during deployment") {
+    return true;
+  }
   const date = new Date(timestamp);
   return date.toString() !== "Invalid Date";
 }

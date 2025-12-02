@@ -9,8 +9,11 @@
     },
     "timestamp": {
       "type": "string",
-      "format": "date-time",
-      "description": "The timestamp of when this list was last updated"
+      "description": "The timestamp of when this list was last updated. Use 'Set automatically during deployment' as a placeholder.",
+      "oneOf": [
+        { "format": "date-time" },
+        { "const": "Set automatically during deployment" }
+      ]
     },
     "version": {
       "type": "object",
