@@ -9,8 +9,11 @@
     },
     "timestamp": {
       "type": "string",
-      "const": "Set automatically during deployment",
-      "description": "Must be the placeholder value. Actual timestamp is set during deployment."
+      "description": "The timestamp of when this list was last updated (ISO 8601 format)",
+      "oneOf": [
+        { "format": "date-time" },
+        { "const": "Set automatically during deployment" }
+      ]
     },
     "version": {
       "type": "object",
