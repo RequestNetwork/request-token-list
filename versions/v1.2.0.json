@@ -1,9 +1,9 @@
 {
   "name": "Request Network Token List",
-  "timestamp": "2025-12-02T16:15:31.000Z",
+  "timestamp": "2025-11-05T16:04:00.000Z",
   "version": {
     "major": 1,
-    "minor": 3,
+    "minor": 2,
     "patch": 0
   },
   "tokens": [
@@ -8135,17 +8135,6 @@
       "type": "ERC20",
       "hash": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
       "chainId": 8453
-    },
-    {
-      "id": "USDC-base-sepolia",
-      "name": "USD Coin Base Sepolia",
-      "symbol": "USDC",
-      "decimals": 6,
-      "address": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      "network": "base-sepolia",
-      "type": "ERC20",
-      "hash": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      "chainId": 84532
     }
   ]
 }
