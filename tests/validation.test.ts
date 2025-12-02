@@ -2,6 +2,9 @@ import { describe, it, expect } from "vitest";
 import { validateTokenList } from "../src/validation/validate";
 import { NetworkType, TokenList, TokenType, CHAIN_IDS } from "../src/types";
 
+// The source file validation requires this placeholder - actual timestamp is set during deployment
+const TIMESTAMP_PLACEHOLDER = "Set automatically during deployment";
+
 describe("Token List Validation", () => {
   const validToken = {
     id: "test-token",
@@ -17,7 +20,7 @@ describe("Token List Validation", () => {
   it("should validate a correct token list", async () => {
     const validList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [validToken],
     };
@@ -28,7 +31,7 @@ describe("Token List Validation", () => {
   it("should reject invalid token addresses", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         {
@@ -44,7 +47,7 @@ describe("Token List Validation", () => {
   it("should reject duplicate token IDs", async () => {
     const duplicateList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         validToken,
@@ -61,7 +64,7 @@ describe("Token List Validation", () => {
   it("should reject invalid decimals", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         {
@@ -77,7 +80,7 @@ describe("Token List Validation", () => {
   it("should validate version format", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: -1, minor: 0, patch: 0 },
       tokens: [validToken],
     };
@@ -88,7 +91,7 @@ describe("Token List Validation", () => {
   it("should validate network type", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         {
@@ -104,7 +107,7 @@ describe("Token List Validation", () => {
   it("should validate token type", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         {
@@ -117,7 +120,18 @@ describe("Token List Validation", () => {
     expect(await validateTokenList(invalidList)).toBe(false);
   });
 
-  it("should validate timestamp format", async () => {
+  it("should reject real timestamps (must use placeholder)", async () => {
+    const invalidList: TokenList = {
+      name: "Test Token List",
+      timestamp: new Date().toISOString(),
+      version: { major: 1, minor: 0, patch: 0 },
+      tokens: [validToken],
+    };
+
+    expect(await validateTokenList(invalidList)).toBe(false);
+  });
+
+  it("should reject invalid timestamp format", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
       timestamp: "invalid-date",
@@ -131,7 +145,7 @@ describe("Token List Validation", () => {
   it("should reject invalid chainId for network", async () => {
     const invalidList: TokenList = {
       name: "Test Token List",
-      timestamp: new Date().toISOString(),
+      timestamp: TIMESTAMP_PLACEHOLDER,
       version: { major: 1, minor: 0, patch: 0 },
       tokens: [
         {
@@ -156,7 +170,7 @@ describe("Token List Validation", () => {
     for (const { network, chainId } of networks) {
       const validList: TokenList = {
         name: "Test Token List",
-        timestamp: new Date().toISOString(),
+        timestamp: TIMESTAMP_PLACEHOLDER,
         version: { major: 1, minor: 0, patch: 0 },
         tokens: [
           {
