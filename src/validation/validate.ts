@@ -113,12 +113,12 @@ function isValidVersion(version: {
 }
 
 function isValidTimestamp(timestamp: string): boolean {
-  // Allow placeholder value that gets replaced during deployment
-  if (timestamp === "Set automatically during deployment") {
-    return true;
+  // Source file must use placeholder - actual timestamp is set during deployment
+  if (timestamp !== "Set automatically during deployment") {
+    console.error("Timestamp must be 'Set automatically during deployment' - actual timestamp is set during deployment");
+    return false;
   }
-  const date = new Date(timestamp);
-  return date.toString() !== "Invalid Date";
+  return true;
 }
 
 function isValidDecimals(decimals: number): boolean {
