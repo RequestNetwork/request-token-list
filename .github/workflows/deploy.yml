@@ -105,6 +105,12 @@ jobs:
                 ALIAS_KEY="${FILE_MAJOR}.${FILE_MINOR}"
                 ALIAS_NAME="v${ALIAS_KEY}.json"
                 
+                # Skip if this is the current version's major.minor (already created above)
+                if [ "$FILE_MAJOR" = "$MAJOR" ] && [ "$FILE_MINOR" = "$MINOR" ]; then
+                  echo "Skipping alias ${ALIAS_NAME} - current version takes precedence"
+                  continue
+                fi
+                
                 # Create alias if it doesn't exist or if this patch is higher
                 CURRENT_PATCH=${highest_patch[$ALIAS_KEY]:-"-1"}
                 if [ "$FILE_PATCH" -gt "$CURRENT_PATCH" ]; then
