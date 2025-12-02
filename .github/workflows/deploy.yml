@@ -88,10 +88,33 @@ jobs:
           # Copy base file
           cp tokens/token-list.json dist/token-list.json
           
-          # Copy all historical versions
+          # Copy all historical versions and create major.minor aliases
           if [ -d "versions" ]; then
-            cp versions/*.json dist/ 2>/dev/null || true
-            echo "Copied historical versions from versions/ directory"
+            # Declare associative array to track highest patch for each major.minor
+            declare -A highest_patch
+            
+            for version_file in versions/*.json; do
+              if [ -f "$version_file" ]; then
+                # Copy the full version file (e.g., v1.2.0.json)
+                cp "$version_file" dist/
+                
+                # Extract version components from the file content
+                FILE_MAJOR=$(jq -r '.version.major' "$version_file")
+                FILE_MINOR=$(jq -r '.version.minor' "$version_file")
+                FILE_PATCH=$(jq -r '.version.patch' "$version_file")
+                ALIAS_KEY="${FILE_MAJOR}.${FILE_MINOR}"
+                ALIAS_NAME="v${ALIAS_KEY}.json"
+                
+                # Create alias if it doesn't exist or if this patch is higher
+                CURRENT_PATCH=${highest_patch[$ALIAS_KEY]:-"-1"}
+                if [ "$FILE_PATCH" -gt "$CURRENT_PATCH" ]; then
+                  cp "$version_file" "dist/${ALIAS_NAME}"
+                  highest_patch[$ALIAS_KEY]=$FILE_PATCH
+                  echo "Created/updated alias ${ALIAS_NAME} from $(basename $version_file)"
+                fi
+              fi
+            done
+            echo "Copied historical versions and created aliases"
           fi
           
           # Create index.html that redirects to latest.json
