@@ -112,6 +112,15 @@ function isValidVersion(version: {
   );
 }
 
+/**
+ * Validates the timestamp field.
+ *
+ * Note: The JSON schema allows both date-time format and the placeholder string
+ * so that consumers can use the schema to validate deployed token lists.
+ * However, THIS validation script enforces the placeholder because it runs
+ * on the source file (tokens/token-list.json) during CI. The actual timestamp
+ * is set during deployment by the GitHub Actions workflow.
+ */
 function isValidTimestamp(timestamp: string): boolean {
   // Source file must use placeholder - actual timestamp is set during deployment
   if (timestamp !== "Set automatically during deployment") {
