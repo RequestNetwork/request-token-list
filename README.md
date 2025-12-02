@@ -65,7 +65,7 @@ We welcome community contributions! To add a new token to the list:
 3. Bump the version appropriately:
    - **Patch** (x.x.1): Bug fixes, corrections to existing tokens
    - **Minor** (x.1.0): New token additions (most common)
-   - **Major** (2.0.0): Breaking changes (e.g., removing tokens, changing schema)
+   - **Major** (2.0.0): Breaking changes (e.g., removing tokens, removing schema fields)
 4. Make sure your token meets our requirements (see [CONTRIBUTING.md](./CONTRIBUTING.md))
 5. Run tests locally: `npm test`
 6. Create a Pull Request
