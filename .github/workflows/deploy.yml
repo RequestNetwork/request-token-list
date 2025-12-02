@@ -94,6 +94,21 @@ jobs:
             echo "Copied historical versions from versions/ directory"
           fi
           
+          # Create index.html that redirects to latest.json
+          cat > dist/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Request Network Token List</title>
+            <meta http-equiv="refresh" content="0; url=latest.json">
+          </head>
+          <body>
+            <p>Redirecting to <a href="latest.json">latest.json</a>...</p>
+          </body>
+          </html>
+          EOF
+          
           echo "Created versioned files: v${VERSION}.json, v${MAJOR}.${MINOR}.json, v${MAJOR}.json, latest.json"
 
       - name: Deploy to GitHub Pages
