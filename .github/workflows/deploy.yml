@@ -88,10 +88,11 @@ jobs:
           # Copy base file
           cp tokens/token-list.json dist/token-list.json
           
-          # Copy all historical versions and create major.minor aliases
+          # Copy all historical versions and create major.minor and major aliases
           if [ -d "versions" ]; then
-            # Declare associative array to track highest patch for each major.minor
-            declare -A highest_patch
+            # Declare associative arrays to track highest versions
+            declare -A highest_patch  # tracks highest patch for each major.minor
+            declare -A highest_minor  # tracks highest minor.patch for each major
             
             for version_file in versions/*.json; do
               if [ -f "$version_file" ]; then
@@ -102,21 +103,39 @@ jobs:
                 FILE_MAJOR=$(jq -r '.version.major' "$version_file")
                 FILE_MINOR=$(jq -r '.version.minor' "$version_file")
                 FILE_PATCH=$(jq -r '.version.patch' "$version_file")
-                ALIAS_KEY="${FILE_MAJOR}.${FILE_MINOR}"
-                ALIAS_NAME="v${ALIAS_KEY}.json"
                 
-                # Skip if this is the current version's major.minor (already created above)
-                if [ "$FILE_MAJOR" = "$MAJOR" ] && [ "$FILE_MINOR" = "$MINOR" ]; then
-                  echo "Skipping alias ${ALIAS_NAME} - current version takes precedence"
-                  continue
+                # Skip if this is the current version's major (already created above)
+                if [ "$FILE_MAJOR" = "$MAJOR" ]; then
+                  echo "Skipping major alias v${FILE_MAJOR}.json - current version takes precedence"
+                  # But still process minor alias if different minor version
+                  if [ "$FILE_MINOR" = "$MINOR" ]; then
+                    echo "Skipping minor alias v${FILE_MAJOR}.${FILE_MINOR}.json - current version takes precedence"
+                    continue
+                  fi
                 fi
                 
-                # Create alias if it doesn't exist or if this patch is higher
-                CURRENT_PATCH=${highest_patch[$ALIAS_KEY]:-"-1"}
+                # Create/update major.minor alias (e.g., v1.2.json)
+                MINOR_KEY="${FILE_MAJOR}.${FILE_MINOR}"
+                MINOR_ALIAS="v${MINOR_KEY}.json"
+                CURRENT_PATCH=${highest_patch[$MINOR_KEY]:-"-1"}
                 if [ "$FILE_PATCH" -gt "$CURRENT_PATCH" ]; then
-                  cp "$version_file" "dist/${ALIAS_NAME}"
-                  highest_patch[$ALIAS_KEY]=$FILE_PATCH
-                  echo "Created/updated alias ${ALIAS_NAME} from $(basename $version_file)"
+                  cp "$version_file" "dist/${MINOR_ALIAS}"
+                  highest_patch[$MINOR_KEY]=$FILE_PATCH
+                  echo "Created/updated alias ${MINOR_ALIAS} from $(basename $version_file)"
+                fi
+                
+                # Create/update major alias (e.g., v1.json) - only for non-current majors
+                if [ "$FILE_MAJOR" != "$MAJOR" ]; then
+                  MAJOR_ALIAS="v${FILE_MAJOR}.json"
+                  # Compare as "minor.patch" to find highest version within major
+                  CURRENT_MINOR_PATCH=${highest_minor[$FILE_MAJOR]:-"-1.-1"}
+                  CURRENT_M=$(echo $CURRENT_MINOR_PATCH | cut -d. -f1)
+                  CURRENT_P=$(echo $CURRENT_MINOR_PATCH | cut -d. -f2)
+                  if [ "$FILE_MINOR" -gt "$CURRENT_M" ] || ([ "$FILE_MINOR" = "$CURRENT_M" ] && [ "$FILE_PATCH" -gt "$CURRENT_P" ]); then
+                    cp "$version_file" "dist/${MAJOR_ALIAS}"
+                    highest_minor[$FILE_MAJOR]="${FILE_MINOR}.${FILE_PATCH}"
+                    echo "Created/updated alias ${MAJOR_ALIAS} from $(basename $version_file)"
+                  fi
                 fi
               fi
             done
