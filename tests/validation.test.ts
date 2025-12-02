@@ -1,9 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { validateTokenList } from "../src/validation/validate";
-import { NetworkType, TokenList, TokenType, CHAIN_IDS } from "../src/types";
-
-// The source file validation requires this placeholder - actual timestamp is set during deployment
-const TIMESTAMP_PLACEHOLDER = "Set automatically during deployment";
+import { NetworkType, TokenList, TokenType, CHAIN_IDS, TIMESTAMP_PLACEHOLDER } from "../src/types";
 
 describe("Token List Validation", () => {
   const validToken = {

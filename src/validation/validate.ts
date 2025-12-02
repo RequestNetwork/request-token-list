@@ -8,6 +8,7 @@ import {
   NetworkType,
   TokenType,
   CHAIN_IDS,
+  TIMESTAMP_PLACEHOLDER,
 } from "../types";
 import schema from "../schemas/token-list-schema.json";
 
@@ -123,8 +124,8 @@ function isValidVersion(version: {
  */
 function isValidTimestamp(timestamp: string): boolean {
   // Source file must use placeholder - actual timestamp is set during deployment
-  if (timestamp !== "Set automatically during deployment") {
-    console.error("Timestamp must be 'Set automatically during deployment' - actual timestamp is set during deployment");
+  if (timestamp !== TIMESTAMP_PLACEHOLDER) {
+    console.error(`Timestamp must be '${TIMESTAMP_PLACEHOLDER}' - actual timestamp is set during deployment`);
     return false;
   }
   return true;
