@@ -1,10 +1,10 @@
 {
   "name": "Request Network Token List",
-  "timestamp": "2025-12-04T22:31:26.000Z",
+  "timestamp": "2025-11-04T03:15:25.000Z",
   "version": {
     "major": 1,
-    "minor": 3,
-    "patch": 2
+    "minor": 1,
+    "patch": 0
   },
   "tokens": [
     {
@@ -5630,6 +5630,17 @@
     },
     {
       "id": "USDS-mainnet",
+      "name": "StableUSD",
+      "symbol": "USDS",
+      "decimals": 6,
+      "address": "0xA4Bdb11dc0a2bEC88d24A3aa1E6Bb17201112eBe",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0xA4Bdb11dc0a2bEC88d24A3aa1E6Bb17201112eBe",
+      "chainId": 1
+    },
+    {
+      "id": "USDS-sky-mainnet",
       "name": "USDS",
       "symbol": "USDS",
       "decimals": 18,
@@ -8135,17 +8146,6 @@
       "type": "ERC20",
       "hash": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2",
       "chainId": 8453
-    },
-    {
-      "id": "USDC-base-sepolia",
-      "name": "USD Coin Base Sepolia",
-      "symbol": "USDC",
-      "decimals": 6,
-      "address": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      "network": "base-sepolia",
-      "type": "ERC20",
-      "hash": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-      "chainId": 84532
     }
   ]
 }
