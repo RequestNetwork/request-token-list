@@ -8,6 +8,7 @@ import {
   NetworkType,
   TokenType,
   CHAIN_IDS,
+  TIMESTAMP_PLACEHOLDER,
 } from "../types";
 import schema from "../schemas/token-list-schema.json";
 
@@ -112,9 +113,22 @@ function isValidVersion(version: {
   );
 }
 
+/**
+ * Validates the timestamp field.
+ *
+ * Note: The JSON schema allows both date-time format and the placeholder string
+ * so that consumers can use the schema to validate deployed token lists.
+ * However, THIS validation script enforces the placeholder because it runs
+ * on the source file (tokens/token-list.json) during CI. The actual timestamp
+ * is set during deployment by the GitHub Actions workflow.
+ */
 function isValidTimestamp(timestamp: string): boolean {
-  const date = new Date(timestamp);
-  return date.toString() !== "Invalid Date";
+  // Source file must use placeholder - actual timestamp is set during deployment
+  if (timestamp !== TIMESTAMP_PLACEHOLDER) {
+    console.error(`Timestamp must be '${TIMESTAMP_PLACEHOLDER}' - actual timestamp is set during deployment`);
+    return false;
+  }
+  return true;
 }
 
 function isValidDecimals(decimals: number): boolean {

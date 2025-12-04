@@ -54,6 +54,12 @@ export enum NetworkType {
   FIAT = "fiat",
 }
 
+/**
+ * Placeholder value for timestamp in the source token list file.
+ * The actual timestamp is set during deployment by the GitHub Actions workflow.
+ */
+export const TIMESTAMP_PLACEHOLDER = "Set automatically during deployment";
+
 export const CHAIN_IDS: Record<string, number> = {
   mainnet: 1,
   matic: 137,
