@@ -34,12 +34,12 @@ jobs:
           jq --arg ts "$TIMESTAMP" '.timestamp = $ts' tokens/token-list.json > tokens/token-list.json.tmp
           mv tokens/token-list.json.tmp tokens/token-list.json
           
-          # Commit timestamp update if changed
+          # Commit timestamp update if changed (skip husky hooks in CI)
           if ! git diff --quiet tokens/token-list.json; then
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git add tokens/token-list.json
-            git commit -m "chore: Update timestamp for release [skip ci]"
+            HUSKY=0 git commit -m "chore: Update timestamp for release [skip ci]"
             git push origin main
           fi
 
@@ -54,11 +54,11 @@ jobs:
             cp tokens/token-list.json versions/v${CURRENT_VERSION}.json
             echo "Preserved v${CURRENT_VERSION}.json as historical snapshot"
             
-            # Commit the historical snapshot back to main
+            # Commit the historical snapshot back to main (skip husky hooks in CI)
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git add versions/v${CURRENT_VERSION}.json
-            git commit -m "chore: Preserve v${CURRENT_VERSION}.json as historical snapshot [skip ci]"
+            HUSKY=0 git commit -m "chore: Preserve v${CURRENT_VERSION}.json as historical snapshot [skip ci]"
             git push origin main
           else
             echo "v${CURRENT_VERSION}.json already exists in versions/ directory"
