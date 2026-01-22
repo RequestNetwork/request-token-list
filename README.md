@@ -127,6 +127,21 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
+## Repository Maintenance
+
+### Branch Protection
+
+This repository has special branch protection settings to support automated deployments:
+
+- **PR requirement**: All changes require a pull request with 1 approving review
+- **GitHub Actions bypass**: The `github-actions` app can push directly to `main` to update timestamps and create version snapshots during deployment
+
+This configuration is necessary because the deployment workflow (`deploy.yml`) pushes automated commits to `main` when a release is published:
+1. Updates the `timestamp` field in `tokens/token-list.json`
+2. Creates a historical snapshot in `versions/`
+
+If org-wide branch protection automation is applied, this repository may need to be excluded to preserve this functionality.
+
 ## Security
 
 For security concerns, please submit an issue or contact the Request Network team.
