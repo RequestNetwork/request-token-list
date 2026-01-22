@@ -46,15 +46,19 @@ Each token in the list contains the following information:
 
 ```json
 {
-  "id": "TKN-mainnet",
-  "name": "Token Name",
-  "address": "0x...",
-  "symbol": "TKN",
-  "decimals": 18,
-  "chainId": 1,
-  "logoURI": "https://..."
+  "id": "USDC-mainnet",
+  "name": "USD Coin",
+  "symbol": "USDC",
+  "decimals": 6,
+  "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "network": "mainnet",
+  "type": "ERC20",
+  "hash": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "chainId": 1
 }
 ```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed field descriptions and supported values.
 
 ## Adding a New Token
 

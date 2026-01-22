@@ -35,14 +35,45 @@ To add a token to the list, ensure it meets the following criteria:
 
 ```json
 {
-  "name": "Token Name",
-  "address": "0x...",
-  "symbol": "TKN",
-  "decimals": 18,
-  "chainId": 1,
-  "logoURI": "https://..."
+  "id": "USDC-mainnet",
+  "name": "USD Coin",
+  "symbol": "USDC",
+  "decimals": 6,
+  "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "network": "mainnet",
+  "type": "ERC20",
+  "hash": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "chainId": 1
 }
 ```
+
+#### Field Descriptions
+
+| Field | Description |
+|-------|-------------|
+| `id` | Unique identifier, typically `SYMBOL-network` (e.g., `USDC-mainnet`) |
+| `name` | Human-readable token name |
+| `symbol` | Token symbol |
+| `decimals` | Number of decimal places |
+| `address` | Token contract address |
+| `network` | Network name (see supported networks below) |
+| `type` | Currency type (see supported types below) |
+| `hash` | For ERC20 tokens, same as `address`. For native tokens, see [hash calculation](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/currency/src/getHash.ts) |
+| `chainId` | Chain ID of the network |
+
+#### Supported Networks
+
+The full list of supported networks can be found in the SDK source code:
+https://github.com/RequestNetwork/requestNetwork/blob/master/packages/types/src/currency-types.ts
+
+Common networks: `mainnet`, `sepolia`, `matic`, `bsc`, `xdai`, `avalanche`, `optimism`, `arbitrum-one`, `base`, `zksyncera`
+
+#### Supported Currency Types
+
+The full list of currency types can be found in the SDK source code:
+https://github.com/RequestNetwork/requestNetwork/blob/master/packages/types/src/request-logic-types.ts
+
+Common types: `ERC20`, `ETH`, `ISO4217` (fiat currencies)
 
 ## Pull Request Process
 
