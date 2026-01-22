@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Required to push commits back to main
+      contents: write  # Required to push historical snapshot to main
     steps:
       - uses: actions/checkout@v5
         with:
@@ -27,83 +27,43 @@ jobs:
       - name: Validate token list
         run: npm run validate
 
-      - name: Update timestamp
-        run: |
-          # Update timestamp to current UTC time
-          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
-          jq --arg ts "$TIMESTAMP" '.timestamp = $ts' tokens/token-list.json > tokens/token-list.json.tmp
-          mv tokens/token-list.json.tmp tokens/token-list.json
-          
-          # Commit timestamp update if changed (skip husky hooks in CI)
-          if ! git diff --quiet tokens/token-list.json; then
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git add tokens/token-list.json
-            HUSKY=0 git commit -m "chore: Update timestamp for release [skip ci]"
-            git push origin main
-          fi
-
-      - name: Preserve current version as historical snapshot
-        run: |
-          # Get the current version being deployed
-          CURRENT_VERSION=$(jq -r '"\(.version.major).\(.version.minor).\(.version.patch)"' tokens/token-list.json)
-          
-          # Check if this version already exists in versions/
-          if [ ! -f "versions/v${CURRENT_VERSION}.json" ]; then
-            mkdir -p versions
-            cp tokens/token-list.json versions/v${CURRENT_VERSION}.json
-            echo "Preserved v${CURRENT_VERSION}.json as historical snapshot"
-            
-            # Commit the historical snapshot back to main (skip husky hooks in CI)
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git add versions/v${CURRENT_VERSION}.json
-            HUSKY=0 git commit -m "chore: Preserve v${CURRENT_VERSION}.json as historical snapshot [skip ci]"
-            git push origin main
-          else
-            echo "v${CURRENT_VERSION}.json already exists in versions/ directory"
-          fi
-
-      - name: Create dist directory
+      - name: Create dist directory with timestamped copies
         run: |
           mkdir -p dist
-          
-          # Extract version components
+
+          # Get current timestamp
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+
+          # Extract version components from source file
           VERSION=$(jq -r '"\(.version.major).\(.version.minor).\(.version.patch)"' tokens/token-list.json)
           MAJOR=$(jq -r '.version.major' tokens/token-list.json)
           MINOR=$(jq -r '.version.minor' tokens/token-list.json)
-          
-          # Copy current version with full version (e.g., v1.1.0.json)
-          cp tokens/token-list.json dist/v${VERSION}.json
-          
-          # Copy with major.minor version (e.g., v1.1.json) - updates automatically
-          cp tokens/token-list.json dist/v${MAJOR}.${MINOR}.json
-          
-          # Copy with major version only (e.g., v1.json) - updates automatically
-          cp tokens/token-list.json dist/v${MAJOR}.json
-          
-          # Copy as latest (always points to newest)
-          cp tokens/token-list.json dist/latest.json
-          
-          # Copy base file
-          cp tokens/token-list.json dist/token-list.json
-          
+
+          # Create timestamped version for deployment (source file unchanged)
+          jq --arg ts "$TIMESTAMP" '.timestamp = $ts' tokens/token-list.json > dist/token-list.json
+
+          # Copy timestamped version to all version aliases
+          cp dist/token-list.json dist/v${VERSION}.json
+          cp dist/token-list.json dist/v${MAJOR}.${MINOR}.json
+          cp dist/token-list.json dist/v${MAJOR}.json
+          cp dist/token-list.json dist/latest.json
+
           # Copy all historical versions and create major.minor and major aliases
           if [ -d "versions" ]; then
             # Declare associative arrays to track highest versions
             declare -A highest_patch  # tracks highest patch for each major.minor
             declare -A highest_minor  # tracks highest minor.patch for each major
-            
+
             for version_file in versions/*.json; do
               if [ -f "$version_file" ]; then
                 # Copy the full version file (e.g., v1.2.0.json)
                 cp "$version_file" dist/
-                
+
                 # Extract version components from the file content
                 FILE_MAJOR=$(jq -r '.version.major' "$version_file")
                 FILE_MINOR=$(jq -r '.version.minor' "$version_file")
                 FILE_PATCH=$(jq -r '.version.patch' "$version_file")
-                
+
                 # Skip if this is the current version's major (already created above)
                 if [ "$FILE_MAJOR" = "$MAJOR" ]; then
                   echo "Skipping major alias v${FILE_MAJOR}.json - current version takes precedence"
@@ -113,7 +73,7 @@ jobs:
                     continue
                   fi
                 fi
-                
+
                 # Create/update major.minor alias (e.g., v1.2.json)
                 MINOR_KEY="${FILE_MAJOR}.${FILE_MINOR}"
                 MINOR_ALIAS="v${MINOR_KEY}.json"
@@ -123,7 +83,7 @@ jobs:
                   highest_patch[$MINOR_KEY]=$FILE_PATCH
                   echo "Created/updated alias ${MINOR_ALIAS} from $(basename $version_file)"
                 fi
-                
+
                 # Create/update major alias (e.g., v1.json) - only for non-current majors
                 if [ "$FILE_MAJOR" != "$MAJOR" ]; then
                   MAJOR_ALIAS="v${FILE_MAJOR}.json"
@@ -141,7 +101,7 @@ jobs:
             done
             echo "Copied historical versions and created aliases"
           fi
-          
+
           # Create index.html that redirects to latest.json
           cat > dist/index.html << 'EOF'
           <!DOCTYPE html>
@@ -156,23 +116,33 @@ jobs:
           </body>
           </html>
           EOF
-          
+
           echo "Created versioned files: v${VERSION}.json, v${MAJOR}.${MINOR}.json, v${MAJOR}.json, latest.json"
+
+      - name: Preserve current version as historical snapshot
+        run: |
+          # Get the current version being deployed
+          CURRENT_VERSION=$(jq -r '"\(.version.major).\(.version.minor).\(.version.patch)"' tokens/token-list.json)
+
+          # Check if this version already exists in versions/
+          if [ ! -f "versions/v${CURRENT_VERSION}.json" ]; then
+            mkdir -p versions
+            # Use the timestamped version from dist/ for the historical snapshot
+            cp dist/v${CURRENT_VERSION}.json versions/v${CURRENT_VERSION}.json
+            echo "Preserved v${CURRENT_VERSION}.json as historical snapshot"
+
+            # Commit the historical snapshot back to main
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add versions/v${CURRENT_VERSION}.json
+            HUSKY=0 git commit -m "chore: Preserve v${CURRENT_VERSION}.json as historical snapshot [skip ci]"
+            git push origin main
+          else
+            echo "v${CURRENT_VERSION}.json already exists in versions/ directory"
+          fi
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-
-      - name: Reset timestamp to placeholder
-        run: |
-          # Reset timestamp to placeholder so future PRs pass validation
-          jq '.timestamp = "Set automatically during deployment"' tokens/token-list.json > tokens/token-list.json.tmp
-          mv tokens/token-list.json.tmp tokens/token-list.json
-
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add tokens/token-list.json
-          HUSKY=0 git commit -m "chore: Reset timestamp to placeholder [skip ci]"
-          git push origin main
