@@ -164,3 +164,15 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+      - name: Reset timestamp to placeholder
+        run: |
+          # Reset timestamp to placeholder so future PRs pass validation
+          jq '.timestamp = "Set automatically during deployment"' tokens/token-list.json > tokens/token-list.json.tmp
+          mv tokens/token-list.json.tmp tokens/token-list.json
+
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add tokens/token-list.json
+          HUSKY=0 git commit -m "chore: Reset timestamp to placeholder [skip ci]"
+          git push origin main
