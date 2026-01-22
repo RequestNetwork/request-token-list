@@ -1,10 +1,10 @@
 {
   "name": "Request Network Token List",
-  "timestamp": "2025-12-04T22:31:26.000Z",
+  "timestamp": "2026-01-22T18:53:30.000Z",
   "version": {
     "major": 1,
-    "minor": 3,
-    "patch": 2
+    "minor": 4,
+    "patch": 0
   },
   "tokens": [
     {
@@ -7683,6 +7683,28 @@
       "network": "bsc",
       "type": "ERC20",
       "hash": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+      "chainId": 56
+    },
+    {
+      "id": "USDC-bsc",
+      "name": "Binance-peg USD Coin",
+      "symbol": "USDC",
+      "decimals": 18,
+      "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+      "network": "bsc",
+      "type": "ERC20",
+      "hash": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+      "chainId": 56
+    },
+    {
+      "id": "USDT-bsc",
+      "name": "Binance-peg BSC-USD",
+      "symbol": "USDT",
+      "decimals": 18,
+      "address": "0x55d398326f99059ff775485246999027b3197955",
+      "network": "bsc",
+      "type": "ERC20",
+      "hash": "0x55d398326f99059ff775485246999027b3197955",
       "chainId": 56
     },
     {
