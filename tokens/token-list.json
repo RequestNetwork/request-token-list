@@ -7687,19 +7687,19 @@
     },
     {
       "id": "USDC-bsc",
-      "name" : "Binance-peg USD Coin",
-      "symbol" :"USDC",
+      "name": "Binance-peg USD Coin",
+      "symbol": "USDC",
       "decimals": 18,
       "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-      "network" : "bsc",
-      "type" : "ERC20",
+      "network": "bsc",
+      "type": "ERC20",
       "hash": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-      "chainId" : 56
+      "chainId": 56
     },
     {
       "id": "USDT-bsc",
       "name": "Binance-peg BSC-USD",
-      "symbol" : "USDT",
+      "symbol": "USDT",
       "decimals": 18,
       "address": "0x55d398326f99059ff775485246999027b3197955",
       "network": "bsc",
