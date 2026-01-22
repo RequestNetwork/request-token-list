@@ -134,6 +134,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of cond
 This repository has special branch protection settings to support automated deployments:
 
 - **PR requirement**: All changes require a pull request with 1 approving review
+- **Required status check**: `validate` must pass (only runs when `tokens/`, `src/`, `tests/`, or `package.json` files change)
 - **GitHub Actions bypass**: The `github-actions` app can push directly to `main` to update timestamps and create version snapshots during deployment
 
 This configuration is necessary because the deployment workflow (`deploy.yml`) pushes automated commits to `main` when a release is published:
