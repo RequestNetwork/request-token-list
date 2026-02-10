@@ -8168,6 +8168,28 @@
       "type": "ERC20",
       "hash": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
       "chainId": 84532
+    },
+    {
+      "id": "USDT-tron",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+      "network": "tron",
+      "type": "TRC20",
+      "hash": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+      "chainId": 728126428
+    },
+    {
+      "id": "USDC-tron",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "address": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
+      "network": "tron",
+      "type": "TRC20",
+      "hash": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
+      "chainId": 728126428
     }
   ]
 }
