@@ -26,6 +26,7 @@ export enum TokenType {
   ISO4217 = "ISO4217",
   ERC20 = "ERC20",
   ETH = "ETH",
+  TRC20 = "TRC20",
 }
 
 export enum NetworkType {
@@ -52,6 +53,7 @@ export enum NetworkType {
   BASE = "base",
   BASE_SEPOLIA = "base-sepolia",
   FIAT = "fiat",
+  TRON = "tron",
 }
 
 /**
@@ -81,4 +83,5 @@ export const CHAIN_IDS: Record<string, number> = {
   base: 8453,
   "base-sepolia": 84532,
   fiat: 0, // Special case for fiat currencies
+  tron: 728126428,
 };
