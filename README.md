@@ -82,8 +82,8 @@ We welcome community contributions! To add a new token to the list:
 
 After merging changes to `main`:
 
-1. Create a GitHub Release with a tag matching the version in `tokens/token-list.json` (e.g., `v1.2.0`)
-   - The tag must use the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.2.0`)
+1. Create a GitHub Release with a tag matching the version in `tokens/token-list.json` (e.g., `1.2.0`)
+   - The tag must use the format `<MAJOR>.<MINOR>.<PATCH>` (e.g., `1.2.0`) — no `v` prefix
    - Ensure the release tag matches the version in your token list exactly
 2. The deployment workflow will automatically:
    - Update the timestamp to the current deployment time
@@ -92,6 +92,8 @@ After merging changes to `main`:
    - Make the new version available at all URL patterns
 
 Monitor deployment progress in the [Actions tab](https://github.com/RequestNetwork/request-token-list/actions/workflows/deploy.yml) of this repository.
+
+**Note**: Git tags do not use a `v` prefix (e.g., `1.2.0`), but the deployed files on GitHub Pages do (e.g., `v1.2.0.json`). The `v` prefix is added by the deployment workflow automatically.
 
 **Note**: The workflow does not validate that the release tag matches the version in `tokens/token-list.json`. If they don't match, the deployed version will use the version from the JSON file, not the release tag. Always ensure they match to avoid confusion.
 
