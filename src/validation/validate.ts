@@ -62,7 +62,15 @@ export async function validateTokenList(
 
 async function validateToken(token: RequestToken): Promise<boolean> {
   // Validate address format
-  if (!ethers.isAddress(token.address)) {
+  if (token.network === NetworkType.TRON) {
+    // TRON addresses are Base58-encoded, starting with 'T', 34 characters long
+    if (!/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(token.address)) {
+      console.error(
+        `Invalid TRON address format for token ${token.id}: ${token.address}`
+      );
+      return false;
+    }
+  } else if (!ethers.isAddress(token.address)) {
     console.error(
       `Invalid address format for token ${token.id}: ${token.address}`
     );

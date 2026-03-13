@@ -88,7 +88,8 @@
             "zksynceratestnet",
             "base",
             "base-sepolia",
-            "fiat"
+            "fiat",
+            "tron"
           ]
         },
         "type": {
@@ -96,7 +97,8 @@
           "enum": [
             "ETH",
             "ERC20",
-            "ISO4217"
+            "ISO4217",
+            "TRC20"
           ]
         },
         "hash": {
