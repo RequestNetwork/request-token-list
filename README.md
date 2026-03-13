@@ -82,8 +82,8 @@ We welcome community contributions! To add a new token to the list:
 
 After merging changes to `main`:
 
-1. Create a GitHub Release with a tag matching the version in `tokens/token-list.json` (e.g., `v1.2.0`)
-   - The tag must use the format `v<MAJOR>.<MINOR>.<PATCH>` (e.g., `v1.2.0`)
+1. Create a GitHub Release with a tag matching the version in `tokens/token-list.json` (e.g., `1.2.0`)
+   - The tag must use the format `<MAJOR>.<MINOR>.<PATCH>` (e.g., `1.2.0`) — no `v` prefix
    - Ensure the release tag matches the version in your token list exactly
 2. The deployment workflow will automatically:
    - Update the timestamp to the current deployment time
