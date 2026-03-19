@@ -8176,7 +8176,7 @@
       "decimals": 6,
       "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
       "network": "tron",
-      "type": "ERC20",
+      "type": "TRC20",
       "hash": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
       "chainId": 728126428
     },
@@ -8187,7 +8187,7 @@
       "decimals": 6,
       "address": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
       "network": "tron",
-      "type": "ERC20",
+      "type": "TRC20",
       "hash": "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
       "chainId": 728126428
     }
