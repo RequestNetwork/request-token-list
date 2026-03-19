@@ -26,6 +26,7 @@ export enum TokenType {
   ISO4217 = "ISO4217",
   ERC20 = "ERC20",
   ETH = "ETH",
+  // TODO change the token lists for Tron to use TRC20 after we fix https://github.com/RequestNetwork/requestNetwork/issues/1713
   TRC20 = "TRC20",
 }
 
