@@ -1,9 +1,9 @@
 {
   "name": "Request Network Token List",
-  "timestamp": "2026-03-16T20:30:33.000Z",
+  "timestamp": "2026-06-24T13:23:25.000Z",
   "version": {
     "major": 1,
-    "minor": 5,
+    "minor": 6,
     "patch": 0
   },
   "tokens": [
@@ -5662,6 +5662,17 @@
       "chainId": 1
     },
     {
+      "id": "EURC-mainnet",
+      "name": "EUR Coin",
+      "symbol": "EURC",
+      "decimals": 6,
+      "address": "0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c",
+      "network": "mainnet",
+      "type": "ERC20",
+      "hash": "0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c",
+      "chainId": 1
+    },
+    {
       "id": "PNK-mainnet",
       "name": "PNK",
       "symbol": "PNK",
@@ -8134,6 +8145,17 @@
       "network": "base",
       "type": "ERC20",
       "hash": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "chainId": 8453
+    },
+    {
+      "id": "EURC-base",
+      "name": "EUR Coin",
+      "symbol": "EURC",
+      "decimals": 6,
+      "address": "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
+      "network": "base",
+      "type": "ERC20",
+      "hash": "0x60a3E35Cc302bFA44Cb288Bc5a4F316Fdb1adb42",
       "chainId": 8453
     },
     {
