@@ -3,7 +3,7 @@
   "timestamp": "Set automatically during deployment",
   "version": {
     "major": 1,
-    "minor": 7,
+    "minor": 8,
     "patch": 0
   },
   "tokens": [
@@ -7903,6 +7903,17 @@
       "network": "sepolia",
       "type": "ERC20",
       "hash": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+      "chainId": 11155111
+    },
+    {
+      "id": "EURC-sepolia",
+      "name": "EUR Coin",
+      "symbol": "EURC",
+      "decimals": 6,
+      "address": "0x08210F9170F89Ab7658F0B5E3fF39b0E03C594D4",
+      "network": "sepolia",
+      "type": "ERC20",
+      "hash": "0x08210F9170F89Ab7658F0B5E3fF39b0E03C594D4",
       "chainId": 11155111
     },
     {
