@@ -7664,6 +7664,17 @@
       "chainId": 137
     },
     {
+      "id": "CAUD-matic",
+      "name": "Cloud AUD",
+      "symbol": "CAUD",
+      "decimals": 8,
+      "address": "0xB1EF313E3119e13f827E14D7c90E03180ac828ed",
+      "network": "matic",
+      "type": "ERC20",
+      "hash": "0xB1EF313E3119e13f827E14D7c90E03180ac828ed",
+      "chainId": 137
+    },
+    {
       "id": "YEL-fantom",
       "name": "YEL",
       "symbol": "YEL",
